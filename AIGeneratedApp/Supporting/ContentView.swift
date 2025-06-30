@@ -19,8 +19,8 @@ struct ContentView: View {
                         coordinator.login()
                     }
                 )
-            case .main:
-                Text("Recipe List Screen (to be implemented)")
+            case .recipeList:
+                coordinator.makeRecipeListModule()
             }
         }
         .animation(.easeInOut, value: coordinator.currentScreen)

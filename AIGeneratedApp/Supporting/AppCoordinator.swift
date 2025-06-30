@@ -5,7 +5,7 @@ import SwiftUI
 enum AppScreen {
     case splash
     case login
-    case main
+    case recipeList
 }
 
 @Observable
@@ -13,14 +13,22 @@ final class AppCoordinator {
     var currentScreen: AppScreen = .splash
     var isLoggedIn: Bool = false
     let dependencies: AppDependencies
+    private var recipeListCoordinator: RecipeListCoordinator?
 
     init(dependencies: AppDependencies) {
         self.dependencies = dependencies
-        checkInitialLoginState()
+        currentScreen = .splash
+    }
+
+    private func checkInitialLoginState() {
+        let hasCredentials = dependencies.credentialsManager.getCredentials() != nil
+        let isGuest = AuthManager.isGuestUser()
+        isLoggedIn = hasCredentials || isGuest
+        currentScreen = isLoggedIn ? .recipeList : .login
     }
 
     func proceedFromSplash() {
-        currentScreen = isLoggedIn ? .main : .login
+        checkInitialLoginState()
     }
 
     func onSplashFinished() {
@@ -29,7 +37,7 @@ final class AppCoordinator {
 
     func login() {
         isLoggedIn = true
-        currentScreen = .main
+        currentScreen = .recipeList
     }
 
     func logout() {
@@ -37,11 +45,12 @@ final class AppCoordinator {
         currentScreen = .login
     }
 
-    private func checkInitialLoginState() {
-        let hasCredentials = dependencies.credentialsManager.getCredentials() != nil
-        let isGuest = AuthManager.isGuestUser()
-        isLoggedIn = hasCredentials || isGuest
-        currentScreen = isLoggedIn ? .main : .login
+    func makeRecipeListModule() -> some View {
+        if recipeListCoordinator == nil {
+            let repository = RecipeRepository(apiManager: APIManager())
+            recipeListCoordinator = RecipeListCoordinator(repository: repository)
+        }
+        return recipeListCoordinator!.makeRecipeListView()
     }
 }
 

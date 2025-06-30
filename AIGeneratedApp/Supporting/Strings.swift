@@ -17,6 +17,7 @@ enum Strings {
     // Recipe List
     static let recipeListTitle = "Recipes"
     static let recipeListEmpty = "No recipes found."
+    static let recipeListSearchPlaceholder = "Search recipes..."
 
     // Recipe Detail
     static let recipeDetailTitle = "Recipe Details"

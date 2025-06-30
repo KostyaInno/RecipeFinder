@@ -8,8 +8,8 @@ protocol CredentialsManaging {
 }
 
 final class CredentialsManager: CredentialsManaging {
-    private let service = "com.yourcompany.recipefinder"
-    
+    private let service = "com.app.recipefinder"
+
     func saveCredentials(username: String, password: String) {
         let credentials: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,

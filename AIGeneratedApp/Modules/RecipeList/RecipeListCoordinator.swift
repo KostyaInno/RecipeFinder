@@ -27,7 +27,8 @@ final class RecipeListCoordinator {
         let viewModel = RecipeListViewModel(repository: repository)
         return RecipeListCoordinatorView(
             coordinator: self,
-            viewModel: viewModel
+            viewModel: viewModel,
+            repository: repository
         )
     }
 }
@@ -35,6 +36,7 @@ final class RecipeListCoordinator {
 struct RecipeListCoordinatorView: View {
     @Bindable var coordinator: RecipeListCoordinator
     @State var viewModel: RecipeListViewModel
+    let repository: RecipeRepositoryProtocol
 
     var body: some View {
         RecipeListView(
@@ -46,7 +48,7 @@ struct RecipeListCoordinatorView: View {
             set: { if !$0 { coordinator.backToList() } }
         )) {
             if case .detail(let id) = coordinator.currentScreen {
-//                RecipeDetailView(recipeID: id)
+                RecipeDetailView(viewModel: RecipeDetailViewModel(repository: repository, recipeId: id))
             }
         }
     }

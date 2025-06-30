@@ -23,4 +23,8 @@ enum Strings {
     static let recipeDetailTitle = "Recipe Details"
     static let ingredientSection = "Ingredients"
     static let instructionsSection = "Instructions"
+    static let recipeDetailTags = "Tags"
+    static let recipeDetailYoutube = "Watch on YouTube"
+    static let recipeDetailSource = "Source"
+    static let recipeDetailNoDetails = "No details available."
 } 

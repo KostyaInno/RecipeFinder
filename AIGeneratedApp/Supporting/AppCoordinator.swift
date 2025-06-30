@@ -46,11 +46,8 @@ final class AppCoordinator {
     }
 
     func makeRecipeListModule() -> some View {
-        if recipeListCoordinator == nil {
-            let repository = RecipeRepository(apiManager: APIManager())
-            recipeListCoordinator = RecipeListCoordinator(repository: repository)
-        }
-        return recipeListCoordinator!.makeRecipeListView()
+        let coordinator = RecipeListCoordinator(repository: dependencies.recipeRepository)
+        return coordinator.makeRecipeListView()
     }
 }
 

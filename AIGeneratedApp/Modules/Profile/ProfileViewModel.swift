@@ -3,24 +3,28 @@ import Observation
 
 @Observable
 final class ProfileViewModel {
-    var email: String? = nil
+    var username: String? = nil
     private let credentialsManager: CredentialsManaging
     private let authManager: AuthManaging
     private let onLogout: () -> Void
+    
+    var isGuest: Bool {
+        AuthManager.isGuestUser()
+    }
     
     init(credentialsManager: CredentialsManaging, authManager: AuthManaging, onLogout: @escaping () -> Void) {
         self.credentialsManager = credentialsManager
         self.authManager = authManager
         self.onLogout = onLogout
-        loadEmail()
+        loadUsername()
     }
     
-    private func loadEmail() {
+    private func loadUsername() {
         guard let credentials = credentialsManager.getCredentials() else {
-            email = nil
+            username = nil
             return
         }
-        email = credentials.username
+        username = credentials.username
     }
     
     func logout() {

@@ -29,9 +29,10 @@ enum Strings {
     static let recipeDetailNoDetails = "No details available."
 
     // Profile
-    static let profileEmailLabel = "Email"
+    static let profileUsernameLabel = "Username"
     static let profileNoEmail = "No user email found."
     static let profileLogoutButton = "Logout"
+    static let profileGuestLabel = "Guest"
 
     // MainTabView
     static let favoritesTabTitle = "Favorites"

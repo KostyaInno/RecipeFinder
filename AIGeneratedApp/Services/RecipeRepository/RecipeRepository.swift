@@ -5,7 +5,7 @@ enum RecipeRepositoryError: Error, LocalizedError {
     var errorDescription: String? {
         switch self {
         case .noRecipeDetailFound:
-            return "No recipe detail found."
+            return Strings.noRecipesDetailsFound
         }
     }
 }

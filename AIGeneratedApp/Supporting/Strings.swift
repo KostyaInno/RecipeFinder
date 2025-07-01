@@ -1,9 +1,6 @@
 import Foundation
 
 enum Strings {
-    // App Name
-    static let appName = "Recipe Finder"
-
     // Splash
     static let splashTitle = "Recipe Finder"
 
@@ -12,15 +9,15 @@ enum Strings {
     static let usernamePlaceholder = "Username"
     static let passwordPlaceholder = "Password"
     static let loginButton = "Login"
-    static let loginErrorEmptyFields = "Please enter both fields."
+    static let loginContinueAsGuest = "Continue as Guest"
+    static let invalidUsernameOrPassword = "Invalid username or password."
 
     // Recipe List
     static let recipeListTitle = "Recipes"
-    static let recipeListEmpty = "No recipes found."
     static let recipeListSearchPlaceholder = "Search recipes..."
 
     // Recipe Detail
-    static let recipeDetailTitle = "Recipe Details"
+    static let noRecipesDetailsFound = "No recipe detail found."
     static let ingredientSection = "Ingredients"
     static let instructionsSection = "Instructions"
     static let recipeDetailTags = "Tags"
@@ -30,9 +27,9 @@ enum Strings {
 
     // Profile
     static let profileUsernameLabel = "Username"
-    static let profileNoEmail = "No user email found."
     static let profileLogoutButton = "Logout"
     static let profileGuestLabel = "Guest"
+    static let profileNoUsername = "-"
 
     // MainTabView
     static let favoritesTabTitle = "Favorites"

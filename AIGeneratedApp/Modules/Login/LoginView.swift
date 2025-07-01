@@ -65,7 +65,7 @@ struct LoginView: View {
             viewModel.loginAsGuest()
             onGuest()
         }) {
-            Text("Continue as Guest")
+            Text(Strings.loginContinueAsGuest)
                 .font(.headline)
                 .frame(maxWidth: .infinity)
                 .padding()

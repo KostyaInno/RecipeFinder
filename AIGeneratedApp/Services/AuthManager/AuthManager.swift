@@ -5,7 +5,7 @@ enum AuthError: Error, LocalizedError {
     var errorDescription: String? {
         switch self {
         case .invalidCredentials:
-            return "Invalid username or password."
+            return Strings.invalidUsernameOrPassword
         }
     }
 }
@@ -18,8 +18,8 @@ protocol AuthManaging {
 
 final class AuthManager: AuthManaging {
     private let credentialsManager: CredentialsManaging
-    private let guestKey = "isGuestUser"
-    
+    private static let guestKey = "isGuestUser"
+
     init(credentialsManager: CredentialsManaging) {
         self.credentialsManager = credentialsManager
     }
@@ -29,7 +29,7 @@ final class AuthManager: AuthManaging {
         let isValid = !credentials.username.isEmpty && !credentials.password.isEmpty
         if isValid {
             credentialsManager.saveCredentials(username: credentials.username, password: credentials.password)
-            UserDefaults.standard.set(false, forKey: guestKey)
+            UserDefaults.standard.set(false, forKey: Self.guestKey)
         } else {
             throw AuthError.invalidCredentials
         }
@@ -37,14 +37,14 @@ final class AuthManager: AuthManaging {
     
     func logout() {
         credentialsManager.deleteCredentials()
-        UserDefaults.standard.set(false, forKey: guestKey)
+        UserDefaults.standard.set(false, forKey: Self.guestKey)
     }
     
     func loginAsGuest() {
-        UserDefaults.standard.set(true, forKey: guestKey)
+        UserDefaults.standard.set(true, forKey: Self.guestKey)
     }
     
     static func isGuestUser() -> Bool {
-        UserDefaults.standard.bool(forKey: "isGuestUser")
+        UserDefaults.standard.bool(forKey: guestKey)
     }
 } 

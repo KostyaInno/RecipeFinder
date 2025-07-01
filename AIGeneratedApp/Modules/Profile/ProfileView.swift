@@ -28,7 +28,7 @@ struct ProfileView: View {
                 Text(Strings.profileUsernameLabel)
                     .font(.caption)
                     .foregroundColor(.secondary)
-                Text(viewModel.username ?? "-")
+                Text(viewModel.username ?? Strings.profileNoUsername)
                     .font(.title2)
                     .fontWeight(.medium)
                     .foregroundColor(.primary)

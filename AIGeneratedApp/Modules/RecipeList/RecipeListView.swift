@@ -22,9 +22,21 @@ struct RecipeListView: View {
     }
     
     private var searchField: some View {
-        TextField(Strings.recipeListSearchPlaceholder, text: $viewModel.searchText)
-            .textFieldStyle(RoundedBorderTextFieldStyle())
-            .padding()
+        HStack {
+            TextField(Strings.recipeListSearchPlaceholder, text: $viewModel.searchText)
+                .textFieldStyle(RoundedBorderTextFieldStyle())
+            if !viewModel.searchText.isEmpty {
+                Button(action: {
+                    viewModel.searchText = ""
+                }) {
+                    Image(systemName: "xmark.circle.fill")
+                        .foregroundColor(.secondary)
+                }
+                .buttonStyle(PlainButtonStyle())
+                .padding(.leading, 4)
+            }
+        }
+        .padding()
     }
     
     @ViewBuilder
@@ -72,5 +84,5 @@ struct RecipeListView: View {
 }
 
 #Preview {
-    RecipeListView(viewModel: RecipeListViewModel(repository: RecipeRepository(apiManager: APIManager()), favoritesRepository: FavoritesLocalRepository(storageManager: FavoritesStorageManager(context: SwiftDataConfigurator().modelContext))))
-} 
+    RecipeListView(viewModel: RecipeListViewModel(recipeRepository: RecipeRepository(apiManager: APIManager()), favoritesRepository: FavoritesLocalRepository(storageManager: FavoritesStorageManager(context: SwiftDataConfigurator().modelContext))))
+}

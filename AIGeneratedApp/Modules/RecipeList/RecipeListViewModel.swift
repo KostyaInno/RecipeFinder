@@ -11,14 +11,14 @@ final class RecipeListViewModel {
     var isLoading: Bool = false
     var errorMessage: String? = nil
     private var favoriteIDs: Set<String> = []
-    
-    private let repository: RecipeRepositoryProtocol
+
+    private let recipeRepository: RecipeRepositoryProtocol
     private let favoritesRepository: FavoritesLocalRepositoryProtocol
     private var cancellables = Set<AnyCancellable>()
     private let searchSubject = PassthroughSubject<String, Never>()
     
-    init(repository: RecipeRepositoryProtocol, favoritesRepository: FavoritesLocalRepositoryProtocol) {
-        self.repository = repository
+    init(recipeRepository: RecipeRepositoryProtocol, favoritesRepository: FavoritesLocalRepositoryProtocol) {
+        self.recipeRepository = recipeRepository
         self.favoritesRepository = favoritesRepository
         loadFavorites()
         setupSearch()
@@ -29,7 +29,7 @@ final class RecipeListViewModel {
         isLoading = true
         errorMessage = nil
         do {
-            let result = try await repository.fetchRecipes(search: searchText)
+            let result = try await recipeRepository.fetchRecipes(search: searchText)
             recipes = result
             loadFavorites()
         } catch {

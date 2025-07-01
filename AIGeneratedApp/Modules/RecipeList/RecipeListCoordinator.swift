@@ -26,7 +26,7 @@ final class RecipeListCoordinator {
     }
 
     func makeRecipeListView() -> some View {
-        let viewModel = RecipeListViewModel(repository: recipeRepository, favoritesRepository: favoritesRepository)
+        let viewModel = RecipeListViewModel(recipeRepository: recipeRepository, favoritesRepository: favoritesRepository)
         return RecipeListCoordinatorView(
             coordinator: self,
             viewModel: viewModel,

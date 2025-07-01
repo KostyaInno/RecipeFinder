@@ -8,11 +8,13 @@ enum RecipeListScreen {
 
 @Observable
 final class RecipeListCoordinator {
-    private let repository: RecipeRepositoryProtocol
+    private let recipeRepository: RecipeRepositoryProtocol
+    private let favoritesRepository: FavoritesLocalRepositoryProtocol
     var currentScreen: RecipeListScreen = .list
 
-    init(repository: RecipeRepositoryProtocol) {
-        self.repository = repository
+    init(recipeRepository: RecipeRepositoryProtocol, favoritesRepository: FavoritesLocalRepositoryProtocol) {
+        self.recipeRepository = recipeRepository
+        self.favoritesRepository = favoritesRepository
     }
 
     func showDetail(for recipeID: String) {
@@ -24,11 +26,12 @@ final class RecipeListCoordinator {
     }
 
     func makeRecipeListView() -> some View {
-        let viewModel = RecipeListViewModel(repository: repository)
+        let viewModel = RecipeListViewModel(repository: recipeRepository, favoritesRepository: favoritesRepository)
         return RecipeListCoordinatorView(
             coordinator: self,
             viewModel: viewModel,
-            repository: repository
+            repository: recipeRepository,
+            favoritesRepository: favoritesRepository
         )
     }
 }
@@ -37,18 +40,32 @@ struct RecipeListCoordinatorView: View {
     @Bindable var coordinator: RecipeListCoordinator
     @State var viewModel: RecipeListViewModel
     let repository: RecipeRepositoryProtocol
+    let favoritesRepository: FavoritesLocalRepositoryProtocol
 
     var body: some View {
         RecipeListView(
             viewModel: viewModel,
-            onSelectRecipe: { id in coordinator.showDetail(for: id) }
+            onSelectRecipe: { id in
+                coordinator.showDetail(for: id)
+            }
         )
         .sheet(isPresented: .init(
-            get: { if case .detail = coordinator.currentScreen { return true } else { return false } },
-            set: { if !$0 { coordinator.backToList() } }
+            get: { if case .detail = coordinator.currentScreen { true } else { false } },
+            set: { isPresented in
+                if !isPresented {
+                    coordinator.backToList()
+                    viewModel.reloadFavorites()
+                }
+            }
         )) {
             if case .detail(let id) = coordinator.currentScreen {
-                RecipeDetailView(viewModel: RecipeDetailViewModel(repository: repository, recipeId: id))
+                RecipeDetailView(
+                    viewModel: RecipeDetailViewModel(
+                        repository: repository,
+                        favoritesRepository: favoritesRepository,
+                        recipeId: id
+                    )
+                )
             }
         }
     }

@@ -1,6 +1,6 @@
 import Foundation
 
-struct Recipe: Identifiable, Decodable {
+struct RecipeResponse: Identifiable, Decodable {
     let id: String
     let name: String
     let thumbnail: String?

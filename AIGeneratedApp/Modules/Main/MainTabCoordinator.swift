@@ -10,7 +10,10 @@ final class MainTabCoordinator {
     }
 
     func makeRecipeListTab() -> some View {
-        RecipeListCoordinator(repository: dependencies.recipeRepository).makeRecipeListView()
+        RecipeListCoordinator(
+            recipeRepository: dependencies.recipeRepository,
+            favoritesRepository: dependencies.favoritesRepository
+        ).makeRecipeListView()
     }
 
     func makeFavoritesTab() -> some View {

@@ -57,7 +57,10 @@ extension AppCoordinator {
     }
 
     func makeRecipeListModule() -> some View {
-        let coordinator = RecipeListCoordinator(repository: dependencies.recipeRepository)
+        let coordinator = RecipeListCoordinator(
+            recipeRepository: dependencies.recipeRepository,
+            favoritesRepository: dependencies.favoritesRepository
+        )
         return coordinator.makeRecipeListView()
     }
 }

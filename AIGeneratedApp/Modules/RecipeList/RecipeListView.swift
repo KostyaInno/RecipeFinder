@@ -15,6 +15,9 @@ struct RecipeListView: View {
                 guard viewModel.recipes.isEmpty else { return }
                 await viewModel.fetchRecipes()
             }
+            .onAppear {
+                viewModel.reloadFavorites()
+            }
         }
     }
     
@@ -48,10 +51,20 @@ struct RecipeListView: View {
     
     private var recipeList: some View {
         List(viewModel.recipes) { recipe in
-            Button(action: {
-                onSelectRecipe?(recipe.id)
-            }) {
-                RecipeCell(recipe: recipe)
+            HStack {
+                Button(action: {
+                    onSelectRecipe?(recipe.id)
+                }) {
+                    RecipeCell(recipe: recipe)
+                }
+                Spacer()
+                Button(action: {
+                    viewModel.toggleFavorite(recipe)
+                }) {
+                    Image(systemName: viewModel.isFavorite(recipe.id) ? "heart.fill" : "heart")
+                        .foregroundColor(viewModel.isFavorite(recipe.id) ? .red : .gray)
+                }
+                .buttonStyle(BorderlessButtonStyle())
             }
         }
         .listStyle(PlainListStyle())
@@ -59,5 +72,5 @@ struct RecipeListView: View {
 }
 
 #Preview {
-    RecipeListView(viewModel: RecipeListViewModel(repository: RecipeRepository(apiManager: APIManager())))
+    RecipeListView(viewModel: RecipeListViewModel(repository: RecipeRepository(apiManager: APIManager()), favoritesRepository: FavoritesLocalRepository(storageManager: FavoritesStorageManager(context: SwiftDataConfigurator().modelContext))))
 } 

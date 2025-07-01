@@ -1,8 +1,18 @@
 import Foundation
 
+enum RecipeRepositoryError: Error, LocalizedError {
+    case noRecipeDetailFound
+    var errorDescription: String? {
+        switch self {
+        case .noRecipeDetailFound:
+            return "No recipe detail found."
+        }
+    }
+}
+
 protocol RecipeRepositoryProtocol {
     func fetchRecipes(search: String) async throws -> [Recipe]
-    func fetchRecipeDetail(id: String) async throws -> RecipeDetail?
+    func fetchRecipeDetail(id: String) async throws -> RecipeDetail
 }
 
 final class RecipeRepository: RecipeRepositoryProtocol {
@@ -16,13 +26,16 @@ final class RecipeRepository: RecipeRepositoryProtocol {
         let response: RecipeListResponse = try await apiManager.request(
             RecipeRoute.searchMeals(name: search)
         )
-        return response.meals ?? []
+        return (response.meals ?? []).map { RecipeMapper.from(response: $0) }
     }
     
-    func fetchRecipeDetail(id: String) async throws -> RecipeDetail? {
-        let response: RecipeDetailResponse = try await apiManager.request(
+    func fetchRecipeDetail(id: String) async throws -> RecipeDetail {
+        let response: RecipeDetailListResponse = try await apiManager.request(
             RecipeRoute.mealDetail(id: id)
         )
-        return response.meals?.first
+        guard let detail = response.meals?.first else {
+            throw RecipeRepositoryError.noRecipeDetailFound
+        }
+        return RecipeDetailMapper.from(response: detail)
     }
 } 

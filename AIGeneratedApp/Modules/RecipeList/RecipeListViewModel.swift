@@ -10,13 +10,17 @@ final class RecipeListViewModel {
     }
     var isLoading: Bool = false
     var errorMessage: String? = nil
+    private var favoriteIDs: Set<String> = []
     
     private let repository: RecipeRepositoryProtocol
+    private let favoritesRepository: FavoritesLocalRepositoryProtocol
     private var cancellables = Set<AnyCancellable>()
     private let searchSubject = PassthroughSubject<String, Never>()
     
-    init(repository: RecipeRepositoryProtocol) {
+    init(repository: RecipeRepositoryProtocol, favoritesRepository: FavoritesLocalRepositoryProtocol) {
         self.repository = repository
+        self.favoritesRepository = favoritesRepository
+        loadFavorites()
         setupSearch()
     }
     
@@ -27,12 +31,57 @@ final class RecipeListViewModel {
         do {
             let result = try await repository.fetchRecipes(search: searchText)
             recipes = result
+            loadFavorites()
         } catch {
             errorMessage = error.localizedDescription
         }
         isLoading = false
     }
-
+    
+    func isFavorite(_ id: String) -> Bool {
+        favoriteIDs.contains(id)
+    }
+    
+    func toggleFavorite(_ recipe: Recipe) {
+        if isFavorite(recipe.id) {
+            removeFavorite(recipe)
+        } else {
+            addFavorite(recipe)
+        }
+    }
+    
+    func reloadFavorites() {
+        loadFavorites()
+    }
+    
+    private func addFavorite(_ recipe: Recipe) {
+        do {
+            let favorite = RecipeMapper.toFavorite(recipe)
+            try favoritesRepository.addOrUpdateFavorite(favorite)
+            favoriteIDs.insert(recipe.id)
+        } catch {
+            // Handle error (optional: set errorMessage)
+        }
+    }
+    
+    private func removeFavorite(_ recipe: Recipe) {
+        do {
+            try favoritesRepository.removeFavorite(recipeId: recipe.id)
+            favoriteIDs.remove(recipe.id)
+        } catch {
+            // Handle error (optional: set errorMessage)
+        }
+    }
+    
+    private func loadFavorites() {
+        do {
+            let favorites = try favoritesRepository.fetchFavorites()
+            favoriteIDs = Set(favorites.map { $0.id })
+        } catch {
+            favoriteIDs = []
+        }
+    }
+    
     private func setupSearch() {
         searchSubject
             .removeDuplicates()

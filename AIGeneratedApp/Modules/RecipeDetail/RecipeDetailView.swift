@@ -45,14 +45,28 @@ struct RecipeDetailView: View {
     private func headerView(_ recipe: RecipeDetail) -> some View {
         VStack(alignment: .leading, spacing: 8) {
             if let urlString = recipe.thumbnail, let url = URL(string: urlString) {
-                AsyncImage(url: url) { image in
-                    image.resizable()
-                        .aspectRatio(contentMode: .fill)
-                } placeholder: {
-                    Color.gray.opacity(0.2)
+                ZStack(alignment: .topTrailing) {
+                    AsyncImage(url: url) { image in
+                        image.resizable()
+                            .aspectRatio(contentMode: .fill)
+                    } placeholder: {
+                        Color.gray.opacity(0.2)
+                    }
+                    .frame(height: 200)
+                    .clipShape(RoundedRectangle(cornerRadius: 12))
+                    Button(action: {
+                        viewModel.toggleFavorite()
+                    }) {
+                        Image(systemName: viewModel.isFavorite ? "heart.fill" : "heart")
+                            .foregroundColor(viewModel.isFavorite ? .red : .gray)
+                            .font(.title2)
+                            .padding(12)
+                            .background(Color(.systemBackground).opacity(0.8))
+                            .clipShape(Circle())
+                            .shadow(radius: 4)
+                    }
+                    .padding(12)
                 }
-                .frame(height: 200)
-                .clipShape(RoundedRectangle(cornerRadius: 12))
             }
             Text(recipe.name)
                 .font(.title)
@@ -129,5 +143,5 @@ struct RecipeDetailView: View {
 }
 
 #Preview {
-    RecipeDetailView(viewModel: RecipeDetailViewModel(repository: RecipeRepository(apiManager: APIManager()), recipeId: "53086"))
+    RecipeDetailView(viewModel: RecipeDetailViewModel(repository: RecipeRepository(apiManager: APIManager()), favoritesRepository: FavoritesLocalRepository(storageManager: FavoritesStorageManager(context: SwiftDataConfigurator().modelContext)), recipeId: "53086"))
 }

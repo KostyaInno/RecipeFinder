@@ -5,3 +5,5 @@ struct Recipe: Identifiable {
     let name: String
     let thumbnail: String?
 }
+
+extension Recipe: Equatable {}

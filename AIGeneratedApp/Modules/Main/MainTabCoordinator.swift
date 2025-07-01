@@ -17,7 +17,11 @@ final class MainTabCoordinator {
     }
 
     func makeFavoritesTab() -> some View {
-        FavoritesView()
+        let viewModel = FavoritesListViewModel(
+            favoritesRepository: dependencies.favoritesRepository,
+            recipeRepository: dependencies.recipeRepository
+        )
+        return FavoritesView(viewModel: viewModel)
     }
 
     func makeProfileTab() -> some View {

@@ -25,3 +25,4 @@ final class APIManager: APIManaging {
         return try decoder.decode(T.self, from: data)
     }
 } 
+ 

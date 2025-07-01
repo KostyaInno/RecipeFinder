@@ -37,3 +37,4 @@ struct AppDependencies {
         self.favoritesRepository = favoritesRepository
     }
 }
+ 

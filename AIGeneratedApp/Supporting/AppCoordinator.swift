@@ -5,7 +5,7 @@ import SwiftUI
 enum AppScreen {
     case splash
     case login
-    case recipeList
+    case mainTabs
 }
 
 @Observable
@@ -13,7 +13,6 @@ final class AppCoordinator {
     var currentScreen: AppScreen = .splash
     var isLoggedIn: Bool = false
     let dependencies: AppDependencies
-    private var recipeListCoordinator: RecipeListCoordinator?
 
     init(dependencies: AppDependencies) {
         self.dependencies = dependencies
@@ -24,7 +23,7 @@ final class AppCoordinator {
         let hasCredentials = dependencies.credentialsManager.getCredentials() != nil
         let isGuest = AuthManager.isGuestUser()
         isLoggedIn = hasCredentials || isGuest
-        currentScreen = isLoggedIn ? .recipeList : .login
+        currentScreen = isLoggedIn ? .mainTabs : .login
     }
 
     func proceedFromSplash() {
@@ -37,17 +36,12 @@ final class AppCoordinator {
 
     func login() {
         isLoggedIn = true
-        currentScreen = .recipeList
+        currentScreen = .mainTabs
     }
 
     func logout() {
         isLoggedIn = false
         currentScreen = .login
-    }
-
-    func makeRecipeListModule() -> some View {
-        let coordinator = RecipeListCoordinator(repository: dependencies.recipeRepository)
-        return coordinator.makeRecipeListView()
     }
 }
 
@@ -55,5 +49,15 @@ extension AppCoordinator {
     func makeLoginModule(onLogin: @escaping () -> Void, onGuest: @escaping () -> Void) -> some View {
         let viewModel = LoginViewModel(authManager: dependencies.authManager)
         return LoginView(viewModel: viewModel, onLogin: onLogin, onGuest: onGuest)
+    }
+
+    func makeMainTabModule() -> some View {
+        let mainTabCoordinator = MainTabCoordinator(dependencies: dependencies, onLogout: { [weak self] in self?.logout() })
+        return MainTabView(coordinator: mainTabCoordinator)
+    }
+
+    func makeRecipeListModule() -> some View {
+        let coordinator = RecipeListCoordinator(repository: dependencies.recipeRepository)
+        return coordinator.makeRecipeListView()
     }
 }

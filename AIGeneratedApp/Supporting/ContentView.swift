@@ -19,8 +19,8 @@ struct ContentView: View {
                         coordinator.login()
                     }
                 )
-            case .recipeList:
-                coordinator.makeRecipeListModule()
+            case .mainTabs:
+                coordinator.makeMainTabModule()
             }
         }
         .animation(.easeInOut, value: coordinator.currentScreen)

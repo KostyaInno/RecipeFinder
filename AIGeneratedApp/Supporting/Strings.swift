@@ -27,4 +27,13 @@ enum Strings {
     static let recipeDetailYoutube = "Watch on YouTube"
     static let recipeDetailSource = "Source"
     static let recipeDetailNoDetails = "No details available."
+
+    // Profile
+    static let profileEmailLabel = "Email"
+    static let profileNoEmail = "No user email found."
+    static let profileLogoutButton = "Logout"
+
+    // MainTabView
+    static let favoritesTabTitle = "Favorites"
+    static let profileTabTitle = "Profile"
 } 

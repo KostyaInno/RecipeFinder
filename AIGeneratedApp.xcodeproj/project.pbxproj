@@ -6,11 +6,27 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXContainerItemProxy section */
+		CE82DE992E1435B300DD2664 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CEBAD2A42E12B12F00FFC3E7 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CEBAD2AB2E12B12F00FFC3E7;
+			remoteInfo = AIGeneratedApp;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		CE82DE952E1435B300DD2664 /* AIGeneratedAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AIGeneratedAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEBAD2AC2E12B12F00FFC3E7 /* AIGeneratedApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AIGeneratedApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		CE82DE962E1435B300DD2664 /* AIGeneratedAppTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = AIGeneratedAppTests;
+			sourceTree = "<group>";
+		};
 		CEBAD2AE2E12B12F00FFC3E7 /* AIGeneratedApp */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = AIGeneratedApp;
@@ -19,6 +35,13 @@
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		CE82DE922E1435B300DD2664 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		CEBAD2A92E12B12F00FFC3E7 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -33,6 +56,7 @@
 			isa = PBXGroup;
 			children = (
 				CEBAD2AE2E12B12F00FFC3E7 /* AIGeneratedApp */,
+				CE82DE962E1435B300DD2664 /* AIGeneratedAppTests */,
 				CEBAD2AD2E12B12F00FFC3E7 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -41,6 +65,7 @@
 			isa = PBXGroup;
 			children = (
 				CEBAD2AC2E12B12F00FFC3E7 /* AIGeneratedApp.app */,
+				CE82DE952E1435B300DD2664 /* AIGeneratedAppTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -48,6 +73,29 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		CE82DE942E1435B300DD2664 /* AIGeneratedAppTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CE82DE9B2E1435B300DD2664 /* Build configuration list for PBXNativeTarget "AIGeneratedAppTests" */;
+			buildPhases = (
+				CE82DE912E1435B300DD2664 /* Sources */,
+				CE82DE922E1435B300DD2664 /* Frameworks */,
+				CE82DE932E1435B300DD2664 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CE82DE9A2E1435B300DD2664 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				CE82DE962E1435B300DD2664 /* AIGeneratedAppTests */,
+			);
+			name = AIGeneratedAppTests;
+			packageProductDependencies = (
+			);
+			productName = AIGeneratedAppTests;
+			productReference = CE82DE952E1435B300DD2664 /* AIGeneratedAppTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		CEBAD2AB2E12B12F00FFC3E7 /* AIGeneratedApp */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = CEBAD2B72E12B13000FFC3E7 /* Build configuration list for PBXNativeTarget "AIGeneratedApp" */;
@@ -80,6 +128,10 @@
 				LastSwiftUpdateCheck = 1640;
 				LastUpgradeCheck = 1640;
 				TargetAttributes = {
+					CE82DE942E1435B300DD2664 = {
+						CreatedOnToolsVersion = 16.4;
+						TestTargetID = CEBAD2AB2E12B12F00FFC3E7;
+					};
 					CEBAD2AB2E12B12F00FFC3E7 = {
 						CreatedOnToolsVersion = 16.4;
 					};
@@ -100,11 +152,19 @@
 			projectRoot = "";
 			targets = (
 				CEBAD2AB2E12B12F00FFC3E7 /* AIGeneratedApp */,
+				CE82DE942E1435B300DD2664 /* AIGeneratedAppTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		CE82DE932E1435B300DD2664 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		CEBAD2AA2E12B12F00FFC3E7 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -115,6 +175,13 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		CE82DE912E1435B300DD2664 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		CEBAD2A82E12B12F00FFC3E7 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -124,7 +191,51 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		CE82DE9A2E1435B300DD2664 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CEBAD2AB2E12B12F00FFC3E7 /* AIGeneratedApp */;
+			targetProxy = CE82DE992E1435B300DD2664 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		CE82DE9C2E1435B300DD2664 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = FZMKYM9M4K;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tsyvilko.AIGeneratedAppTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AIGeneratedApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/AIGeneratedApp";
+			};
+			name = Debug;
+		};
+		CE82DE9D2E1435B300DD2664 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = FZMKYM9M4K;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tsyvilko.AIGeneratedAppTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AIGeneratedApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/AIGeneratedApp";
+			};
+			name = Release;
+		};
 		CEBAD2B52E12B13000FFC3E7 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -305,6 +416,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		CE82DE9B2E1435B300DD2664 /* Build configuration list for PBXNativeTarget "AIGeneratedAppTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CE82DE9C2E1435B300DD2664 /* Debug */,
+				CE82DE9D2E1435B300DD2664 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		CEBAD2A72E12B12F00FFC3E7 /* Build configuration list for PBXProject "AIGeneratedApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

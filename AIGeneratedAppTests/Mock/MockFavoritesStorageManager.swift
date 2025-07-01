@@ -1,3 +1,6 @@
+import Foundation
+@testable import AIGeneratedApp
+
 final class MockFavoritesStorageManager: FavoritesStorageManaging {
     var storage: [String: FavoriteRecipeModel] = [:]
     var addOrUpdateCalled = false
